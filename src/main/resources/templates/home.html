@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <title>Base de conhecimento Jiva & Sankhya</title>
+
+    <link rel="icon" type="image/png" th:href="@{/img/icon-16x16.png}" sizes="16x16">
+    <link rel="icon" type="image/png" th:href="@{/img/icon-32x32.png}" sizes="32x32">
+    <link rel="icon" type="image/png" th:href="@{/img/icon-96x96.png}" sizes="96x96">
+    <link th:href="@{/vendors/css/bootstrap.min.css}" rel="stylesheet" />
+    <link th:href="@{/css/font.css}" rel="stylesheet" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/css/style-own.css}" rel="stylesheet" />
+    <!--<link rel="stylesheet" type="text/css" media="all" href="https://ajuda.jiva.com.br/HelpCenter/Stylesheet/Version/15187146701551386425" />-->
+</head>
+
+<body class="body">
+
+    <header class="header ">
+        <div class="header__top">
+            <div class="header__top__wrapper wrap">
+                <div class="branding">
+                    <a href="https://ajuda.jiva.com.br" title="Ir para página inicial">
+                        <img class="branding__logo flex-item" src="https://ajuda.jiva.com.br/logo.png?1518714670" alt="Jiva">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search--self sm-max-hide">
+            <div class="search u-relative js-search-view" id="search--home" data-ui-component="search-home">
+                <form class="inputaddon" id="search-form" method="POST" th:action="@{/search}" th:object="${requestDTO}" accept-charset="UTF-8">
+                    <input class="input--search inputaddon__field inputaddon__field--big js-required-input"
+                        id="search-input" type="text" placeholder="Eu preciso de ajuda com..." th:field="*{query}" name="query" autocomplete="off">
+                    <button class="inputaddon__item button" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="wrap wrap--body wrap--search" th:if="${hasResult} == true">
+            <main>
+                <div class="ruled u-cf">
+                    <p class="u-floatleft u-mtopsmall"><span th:text="${qtdResult}"></span> resultados encontrados para <span class="color--texthead u-textbold" th:text="${query}"></span></p>
+                </div>
+                <ol class="listing listing--search">
+                    <li class="media" th:each="result: ${results}">
+                        <div class="media__body search-result--mixed">
+                            <span class="badge badge-secondary" th:each="tag : ${result.tag}" th:text="${tag}"></span>
+                            <h2 class="listing__head">
+                                <a th:text="${result.title}" href="https://ajuda.jiva.com.br/article/13550-portal-de-vendas-atributos-da-tela"></a>
+                            </h2>
+                            <p th:text="${result.highlight}" />
+                        </div>
+                    </li>
+                </ol>
+
+                <h2 class="listing__head"><a
+                    href="https://ajuda.jiva.com.br/search/articles?query=portal de vendas&page=2">Visualizar mais 584 resultados »</a>
+                </h2>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <a href="http://jiva.com.br" target="_blank">Sankhya & Jiva Gestão Empresarial</a>
+        </div>
+    </footer>
+
+    <script type="text/javascript"> window.NREUM || (NREUM = {}); NREUM.info = { "beacon": "bam.nr-data.net", "licenseKey": "89aa031aed", "applicationID": "98031495", "transactionName": "bwQEZEFQXkFXAkwKWVZOJUVARV9fGTJdAkRbCUlxX10=", "queueTime": 0, "applicationTime": 548, "atts": "Q0MHEglKTU8=", "errorBeacon": "bam.nr-data.net", "agent": "" } </script>
+
+</body>
+</html>
